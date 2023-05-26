@@ -1,19 +1,28 @@
-require_relative 'lib/database_connection'
-require_relative 'lib/artist_repository'
-require_relative 'lib/album_repository'
+require_relative 'album_repository'
+require_relative 'database_connection'
 
-# We need to give the database name to the method `connect`.
-DatabaseConnection.connect('music_library')
-
-# Perform a SQL query on the dtabase and get the result set.
-
-artist_repository = ArtistRepository.new
-album_repository = AlbumRepository.new
-
-artist_repository.all.each do |artist|
-  p artist
+class App
+  DatabaseConnection.connect('music_library')
+  
+  def list
+    albums = AlbumRepository.new
+    albums.all.each do |album|
+      puts "#{album.id} - #{album.title} - #{album.artist_id} "
+    end
+  end
+  
+  def find(id)
+    repo = AlbumRepository.new
+    album = repo.find(id)
+    puts "#{album.id} - #{album.title} - #{album.artist_id} "
+  end
 end
 
-album_repository.all.each do |album|
-  p album
-end
+app = App.new
+
+puts "===ALL ALBUMS==="
+app.list
+
+puts "\nChoose an album by ID:"
+id = gets.chomp
+app.find(id)

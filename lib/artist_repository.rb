@@ -1,5 +1,6 @@
 require_relative './artist'
 
+
 class ArtistRepository
   def all
     sql = 'SELECT id, name, genre FROM artists;'

@@ -1,28 +1,11 @@
-require_relative 'album_repository'
-require_relative 'database_connection'
-
-class App
-  DatabaseConnection.connect('music_library')
-  
-  def list
-    albums = AlbumRepository.new
-    albums.all.each do |album|
-      puts "#{album.id} - #{album.title} - #{album.artist_id} "
-    end
-  end
-  
-  def find(id)
-    repo = AlbumRepository.new
-    album = repo.find(id)
-    puts "#{album.id} - #{album.title} - #{album.artist_id} "
-  end
+require_relative 'lib/database_connection'
+require_relative 'lib/artist_repository'
+require_relative 'lib/album_repository'
+# We need to give the database name to the method `connect`.
+DatabaseConnection.connect('music_library_test')
+result = AlbumRepository.new
+pls_work = result.all
+# Print out each record from the result set .
+pls_work.each do |aaa|
+  p aaa
 end
-
-app = App.new
-
-puts "===ALL ALBUMS==="
-app.list
-
-puts "\nChoose an album by ID:"
-id = gets.chomp
-app.find(id)

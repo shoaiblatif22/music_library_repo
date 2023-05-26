@@ -1,5 +1,6 @@
 require 'artist_repository'
 
+
 RSpec.describe ArtistRepository do
 
   def reset_artists_table
@@ -8,7 +9,7 @@ RSpec.describe ArtistRepository do
     connection.exec(seed_sql)
   end
 
-  before (:each) do
+  before(:each) do
     reset_artists_table
   end
 

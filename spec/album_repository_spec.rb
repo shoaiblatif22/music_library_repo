@@ -1,5 +1,5 @@
 require 'album_repository'
-require 'pg'
+#require 'pg'
 
 
 RSpec.describe AlbumRepository do
@@ -12,15 +12,16 @@ RSpec.describe AlbumRepository do
   before(:each) do 
     reset_albums_table
   end
-
-  it "returns two albums" do
-    repo = AlbumRepository.new
-
-    albums = repo.all
-    expect(albums.length).to eq 2 # => 2
-    expect(albums.first.title).to eq "Bossanova" # => 'Bossanova'
-    expect(albums.first.release_year).to eq '1999' # => '1999'
-    expect(albums.first.artist_id).to eq '1' # => '1'
+  
+  describe "returns albums" do
+    it "returns two albums" do
+      repo = AlbumRepository.new
+      albums = repo.all
+      expect(albums.length).to eq 2 # => 2
+      expect(albums.first.title).to eq "Bossanova" # => 'Bossanova'
+      expect(albums.first.release_year).to eq '1999' # => '1999'
+      expect(albums.first.artist_id).to eq '1' # => '1'
+    end
 
     it 'returns the single album Bossonova' do
       repo = AlbumRepository.new
